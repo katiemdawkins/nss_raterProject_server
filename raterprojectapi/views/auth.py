@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-#from levelupapi.models import Gamer
+from raterprojectapi.models import Gamer
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -53,7 +53,7 @@ def register_user(request):
         last_name=request.data['last_name']
     )
 
-    # Now save the extra info in the levelupapi_gamer table
+    # Now save the extra info in the raterproject_gamer table
     gamer = Gamer.objects.create(
         bio=request.data['bio'],
         user=new_user
