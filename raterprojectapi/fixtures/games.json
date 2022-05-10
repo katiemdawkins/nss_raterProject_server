@@ -1,0 +1,30 @@
+[
+    {
+        "model": "raterprojectapi.game",
+        "pk": 1,
+        "fields": {
+            "title": "Monopoly",
+            "description": "A long game.",
+            "maker": "Matel",
+            "year_released": 1957,
+            "num_of_players": 4,
+            "est_time_to_play_minutes": 120,
+            "age_rec": 8,
+            "gamer": 1
+        }
+    },
+    {
+        "model": "raterprojectapi.game",
+        "pk": 2,
+        "fields": {
+            "title": "Twister",
+            "description": "Let's get twisty",
+            "maker": "Matel",
+            "year_released": 1985,
+            "num_of_players": 4,
+            "est_time_to_play_minutes": 20,
+            "age_rec": 8,
+            "gamer": 1
+        }
+    }
+]

@@ -1,0 +1,11 @@
+[
+    {
+        "model": "raterprojectapi.game_review",
+        "pk": 1,
+        "fields": {
+            "game": 1,
+            "gamer": 1,
+            "content": "Classic game! I love it so much especially when the game takes 2+hours."
+        }
+    }
+]

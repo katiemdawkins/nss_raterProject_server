@@ -1,0 +1,11 @@
+[
+    {
+        "model": "raterprojectapi.game_pics",
+        "pk": 1,
+        "fields": {
+            "game": 1,
+            "gamer": 1,
+            "picture": "https://www.gannett-cdn.com/presto/2021/12/01/NWOR/d6a5061c-3757-4f4b-95a8-37cd05666e67-Worcester_Monopoly_NL.jpg"
+        }
+    }
+]
