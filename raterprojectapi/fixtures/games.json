@@ -10,7 +10,8 @@
             "num_of_players": 4,
             "est_time_to_play_minutes": 120,
             "age_rec": 8,
-            "gamer": 1
+            "gamer": 1,
+            "categories": [1, 10]
         }
     },
     {
@@ -24,7 +25,8 @@
             "num_of_players": 4,
             "est_time_to_play_minutes": 20,
             "age_rec": 8,
-            "gamer": 1
+            "gamer": 1,
+            "categories":[7,8]
         }
     }
 ]
