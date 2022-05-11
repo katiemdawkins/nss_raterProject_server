@@ -4,12 +4,14 @@ from django.urls import path
 from rest_framework import routers
 from raterprojectapi.views import register_user, login_user
 from raterprojectapi.views.CategoryView import CategoryView
+from raterprojectapi.views.GameReviewView import GameReviewView
 from raterprojectapi.views.GameView import GameView
 
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'games', GameView, 'game')
 router.register(r'categories', CategoryView, 'category')
+router.register(r'gamereviews', GameReviewView, 'gamereview')
 
 
 urlpatterns = [

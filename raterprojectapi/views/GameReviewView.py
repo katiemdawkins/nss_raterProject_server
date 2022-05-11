@@ -3,12 +3,12 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from django.core.exceptions import ValidationError
-
 from raterprojectapi.models.game import Game
-from raterprojectapi.models.gamer import Gamer
-from raterprojectapi.views.GameReviewView import GameReviewSerializer
 
-class GameView(ViewSet):
+from raterprojectapi.models.game_review import Game_Review
+from raterprojectapi.models.gamer import Gamer
+
+class GameReviewView(ViewSet):
     """Rater game view"""
     
     def retrieve(self, request, pk):
@@ -17,42 +17,43 @@ class GameView(ViewSet):
             Response -- JSON serialized game
             """
         try:
-            game = Game.objects.get(pk=pk)
-            serializer = GameSerializer(game)
+            game_review = Game_Review.objects.get(pk=pk)
+            serializer = GameReviewSerializer(game_review)
             return Response(serializer.data)
-        except Game.DoesNotExist as ex:
+        except Game_Review.DoesNotExist as ex:
             return Response ({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
-        
+    
     def list(self, request):
         """Handle Get requests to get all games"""
         
-        games = Game.objects.all()
+        game_reviews = Game_Review.objects.all()
         
-        serializer = GameSerializer(games, many=True)
+        serializer = GameReviewSerializer(game_reviews, many=True)
         return Response(serializer.data)
     
     def create(self, request):
         """Handle POST operations"""
         
         gamer = Gamer.objects.get(user=request.auth.user)
-        serializer = CreateGameSerializer(data=request.data)
+        game = Game.objects.get(pk=request.data["game"])
+        serializer = CreateGameReviewSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save(gamer=gamer)
+        serializer.save(gamer=gamer, game=game)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-            
-class GameSerializer(serializers.ModelSerializer):
+    
+    
+class GameReviewSerializer(serializers.ModelSerializer):
     """JSON serializer for games"""
-    reviews = GameReviewSerializer(many=True)
     
     class Meta:
-        model = Game
-        fields = ('id','title', 'description', 'maker', 'year_released', 'num_of_players', 'est_time_to_play_minutes', 'age_rec', 'gamer', 'categories', 'reviews')
+        model = Game_Review
+        fields = ('id','game', 'gamer', 'content')
         depth = 1
-
-class CreateGameSerializer(serializers.ModelSerializer):
+        
+class CreateGameReviewSerializer(serializers.ModelSerializer):
     """JSON serializer for games"""
     
     class Meta:
-        model = Game
-        fields = ('id','title', 'description', 'maker', 'year_released', 'num_of_players', 'est_time_to_play_minutes', 'age_rec', 'gamer', 'categories')
+        model = Game_Review
+        fields = ('id','game', 'gamer', 'content')
         depth = 1
