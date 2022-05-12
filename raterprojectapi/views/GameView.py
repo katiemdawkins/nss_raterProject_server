@@ -39,6 +39,15 @@ class GameView(ViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save(gamer=gamer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    def update(self, request, pk):
+        """handle PUT requests"""
+        
+        game = Game.objects.get(pk=pk)
+        serializer= CreateGameSerializer(game, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
             
 class GameSerializer(serializers.ModelSerializer):
     """JSON serializer for games"""
