@@ -10,3 +10,19 @@ class Game(models.Model):
     age_rec = models.IntegerField()
     gamer = models.ForeignKey("Gamer", on_delete=models.CASCADE)
     categories = models.ManyToManyField("Category", through="Game_Category", related_name="games")
+    
+    @property
+    def average_rating(self):
+        """Average rating calculated attribute for each game"""
+        ratings = self.ratings.all()
+
+        # Sum all of the ratings for the game
+        total_rating = 0
+        for rating in ratings:
+            total_rating += rating.rating
+
+        # Calculate the averge and return it.
+        ave_rating = total_rating / len(ratings)
+        return ave_rating
+        
+        #return the result

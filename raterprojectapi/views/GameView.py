@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 
 from raterprojectapi.models.game import Game
 from raterprojectapi.models.gamer import Gamer
+from raterprojectapi.views.GameRatingView import RatingSerializer
 from raterprojectapi.views.GameReviewView import GameReviewSerializer
 
 class GameView(ViewSet):
@@ -51,11 +52,14 @@ class GameView(ViewSet):
             
 class GameSerializer(serializers.ModelSerializer):
     """JSON serializer for games"""
+    #we have reviews because of the related name in GameReview model
+    #the serializer gives us back what we want
     reviews = GameReviewSerializer(many=True)
+    #ratings = RatingSerializer(many=True)
     
     class Meta:
         model = Game
-        fields = ('id','title', 'description', 'maker', 'year_released', 'num_of_players', 'est_time_to_play_minutes', 'age_rec', 'gamer', 'categories', 'reviews')
+        fields = ('id','title', 'description', 'maker', 'year_released', 'num_of_players', 'est_time_to_play_minutes', 'age_rec', 'gamer', 'categories', 'reviews', 'average_rating')
         depth = 1
 
 class CreateGameSerializer(serializers.ModelSerializer):
